@@ -48,6 +48,9 @@ profile-*
 # webstorm
 .idea
 
+# env
+.env
+
 # vscode
 .vscode
 *code-workspace

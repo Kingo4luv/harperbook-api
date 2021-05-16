@@ -17,13 +17,22 @@ const bookOptions = {
 
 module.exports = async function (fastify, opts) {
     fastify.post('/', bookOptions, async (request, reply) => {
-        console.log(request.body)
         try {
             const res = await client.insert({
                 table: 'books',
                 records: [request.body]
             })
             reply.code(201).send(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    });
+
+    fastify.get('/', async function (request, reply) {
+        const querySelect = "select * from tutorials.books";
+        try {
+            const res = await client.query(querySelect)
+            reply.status(200).send(res.data);
         } catch (err) {
             console.log(err);
         }
